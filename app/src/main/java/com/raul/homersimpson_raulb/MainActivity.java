@@ -1,14 +1,18 @@
 package com.raul.homersimpson_raulb;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     AnimationDrawable titulo_simpson;
     boolean bol = false;
+    MediaPlayer player;
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         titulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bol==true){
+                if(bol){
                     //cambiar bool
                     bol=false;
                     // quitar fotos
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     ojo.setVisibility(View.INVISIBLE);
                     donut.setVisibility(View.INVISIBLE);
                     ejeRojo.setVisibility(View.INVISIBLE);
-
+                    pause(v);
                     }
                 else{
                     bol=true;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     ejeAzul.setVisibility(View.VISIBLE);
                     ejeVerde.setVisibility(View.VISIBLE);
                     donut.setVisibility(View.VISIBLE);
+                    play(v);
                  }
             }
         });
@@ -60,5 +65,47 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean bol) {
         super.onWindowFocusChanged(bol);
         titulo_simpson.start();
+    }
+
+    public void play(View v) {
+        if (player == null) {
+
+            player = MediaPlayer.create(this, R.raw.the_simpsons);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopPlayer();
+                }
+            });
+
+        }
+
+        player.start();
+        Toast.makeText(this, "Reproductor iniciado", Toast.LENGTH_SHORT).show();
+    }
+
+    public void pause(View v) {
+        if (player != null) {
+            player.pause();
+            Toast.makeText(this, "Reproductor pausado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void stop(View v) {
+        stopPlayer();
+    }
+
+    private void stopPlayer() {
+        if (player != null) {
+            player.release();
+            player = null;
+            Toast.makeText(this, "Reproductor parado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlayer();
     }
 }
