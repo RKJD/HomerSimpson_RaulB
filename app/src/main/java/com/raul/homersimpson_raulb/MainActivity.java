@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     AnimationDrawable titulo_simpson;
     boolean bol = false;
     boolean bolMusica = false;
-    boolean bolAnime = false;
     MediaPlayer player;
 
      @Override
@@ -44,10 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 if(bol){
                     //cambiar bool
                     bol=false;
+                    paradeRotar(ojo);
+                    paradeRotar(ejeAzul);
+                    paradeRotar(ejeRojo);
+                    paradeRotar(ejeVerde);
+                    paradeRotar(donut);
+
                     // quitar fotos
                     ejeAzul.setVisibility(View.INVISIBLE);
                     ejeVerde.setVisibility(View.INVISIBLE);
-                    paradeRotar(ojo);
                     ojo.setVisibility(View.INVISIBLE);
                     donut.setVisibility(View.INVISIBLE);
                     ejeRojo.setVisibility(View.INVISIBLE);
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                     ejeAzul.setVisibility(View.VISIBLE);
                     ejeVerde.setVisibility(View.VISIBLE);
                     donut.setVisibility(View.VISIBLE);
+                    rotarDonut(donut);
+                    rotarEngranaje1(ejeVerde);
+                    rotarEngranaje2(ejeAzul);
+                    rotarEngranaje2(ejeRojo);
 
                  }
             }
@@ -141,6 +149,36 @@ public class MainActivity extends AppCompatActivity {
         animation.setDuration(2000);
         animation.setRepeatCount(Animation.INFINITE);
         animation.setRepeatMode(Animation.REVERSE);
+        view.startAnimation(animation);
+    }
+    private void rotarEngranaje1(View view) {
+        RotateAnimation animation = new RotateAnimation(0, 360,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
+        animation.setDuration(2000);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.INFINITE);
+        view.startAnimation(animation);
+    }
+    private void rotarEngranaje2(View view) {
+        RotateAnimation animation = new RotateAnimation(360, 0,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
+        animation.setDuration(2000);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.INFINITE);
+        view.startAnimation(animation);
+    }
+    private void rotarDonut(View view) {
+        RotateAnimation animation = new RotateAnimation(360, 0,
+                RotateAnimation.RELATIVE_TO_SELF, 1,
+                RotateAnimation.RELATIVE_TO_SELF, 1);
+
+        animation.setDuration(2000);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.INFINITE);
         view.startAnimation(animation);
     }
     private void paradeRotar(View view) {
