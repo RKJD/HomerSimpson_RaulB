@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     AnimationDrawable titulo_simpson;
     boolean bol = false;
+    boolean bolMusica = false;
     MediaPlayer player;
 
      @Override
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     ojo.setVisibility(View.INVISIBLE);
                     donut.setVisibility(View.INVISIBLE);
                     ejeRojo.setVisibility(View.INVISIBLE);
-                    pause(v);
+
                     }
                 else{
                     bol=true;
@@ -56,10 +57,25 @@ public class MainActivity extends AppCompatActivity {
                     ejeAzul.setVisibility(View.VISIBLE);
                     ejeVerde.setVisibility(View.VISIBLE);
                     donut.setVisibility(View.VISIBLE);
-                    play(v);
+
                  }
             }
         });
+         donut.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 if(bolMusica){
+                     //cambiar bool
+                     bolMusica=false;
+                     pause(v);
+                 }
+                 else{
+                     bolMusica=true;
+                     // cambiar bool
+                     play(v);
+                 }
+             }
+         });
     }
     @Override
     public void onWindowFocusChanged(boolean bol) {
