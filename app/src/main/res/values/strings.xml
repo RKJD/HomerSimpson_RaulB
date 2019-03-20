@@ -3,4 +3,9 @@
     <string name="homer">homer</string>
     <string name="titulo0">titulo0</string>
     <string name="titulos">titulos</string>
+    <string name="ejerojo">ejeRojo</string>
+    <string name="ejeazul">ejeAzul</string>
+    <string name="ejeverde">ejeVerde</string>
+    <string name="donut">donut</string>
+    <string name="titulosimpsons">tituloSimpsons</string>
 </resources>
