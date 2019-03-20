@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     ejeVerde.setVisibility(View.VISIBLE);
                     donut.setVisibility(View.VISIBLE);
                     rotarDonut(donut);
+
                     rotarEngranaje1(ejeVerde);
                     rotarEngranaje2(ejeAzul);
                     rotarEngranaje2(ejeRojo);
@@ -172,15 +175,31 @@ public class MainActivity extends AppCompatActivity {
         view.startAnimation(animation);
     }
     private void rotarDonut(View view) {
-        RotateAnimation animation = new RotateAnimation(360, 0,
-                RotateAnimation.RELATIVE_TO_SELF, 1,
-                RotateAnimation.RELATIVE_TO_SELF, 1);
+        AnimationSet animationSet = new AnimationSet(true);
+        TranslateAnimation animation = new TranslateAnimation(
+                TranslateAnimation.RELATIVE_TO_PARENT,0.0f,
+                TranslateAnimation.RELATIVE_TO_PARENT,0.0f,
+                TranslateAnimation.RELATIVE_TO_PARENT,0.0f,
+                TranslateAnimation.RELATIVE_TO_PARENT,0.2f);
 
         animation.setDuration(2000);
         animation.setRepeatCount(Animation.INFINITE);
-        animation.setRepeatMode(Animation.INFINITE);
-        view.startAnimation(animation);
-    }
+        animation.setRepeatMode(Animation.REVERSE);
+
+
+        RotateAnimation animation2 = new RotateAnimation(0, 360,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
+        animation2.setDuration(2000);
+        animation2.setRepeatCount(Animation.INFINITE);
+        animation2.setRepeatMode(Animation.INFINITE);
+
+        animationSet.addAnimation(animation);
+        animationSet.addAnimation(animation2);
+        view.startAnimation(animationSet);
+  }
+
     private void paradeRotar(View view) {
         RotateAnimation animation = new RotateAnimation(0, 1,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
